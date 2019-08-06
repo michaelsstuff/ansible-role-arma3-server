@@ -3,14 +3,14 @@
   command: "{{ steamcmd_directory }}steamcmd.sh +login {{ steamcmd_steam.username }} {{ steamcmd_steam.password }} +force_install_dir {{ arma3_install_dir }} +app_update 233780 validate +quit"
   register: output
   become: yes
-  become_user: {{ steamcmd_user }}
+  become_user: "{{ steamcmd_user }}"
 
 - name: create cryptkeyfile
   template:
     src: secret.key.j2
     dest: "{{ steamcmd_user_home }}secret.key"
-    owner: {{ steamcmd_user }}
-    group: {{ steamcmd_user }}
+    owner: "{{ steamcmd_user }}"
+    group: "{{ steamcmd_user }}"
     mode: '0600'
 
 - name: encrypt steampass for parameter file
@@ -22,23 +22,23 @@
   template:
     src: config.cfg.server.j2
     dest: "{{ steamcmd_user_home }}config.cfg"
-    owner: {{ steamcmd_user }}
-    group: {{ steamcmd_user }}
+    owner: "{{ steamcmd_user }}"
+    group: "{{ steamcmd_user }}"
     mode: '0600'
 
 - name: generate ArmA 3 server.cfg
   template:
     src: server.cfg.j2
     dest: "{{ arma3_install_dir }}server.cfg"
-    owner: {{ steamcmd_user }}
-    group: {{ steamcmd_user }}
+    owner: "{{ steamcmd_user }}"
+    group: "{{ steamcmd_user }}"
     mode: '0600'
 
 - name: copy server.sh
-  -file:
+  file:
     dest: "{{ steamcmd_user_home }}server.sh"
-    owner: {{ steamcmd_user }}
-    group: {{ steamcmd_user }}
+    owner: "{{ steamcmd_user }}"
+    group: "{{ steamcmd_user }}"
     mode: '0744'
 
 - name: create untifile
