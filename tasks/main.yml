@@ -13,6 +13,11 @@
     group: "{{ steamcmd_user }}"
     mode: '0600'
 
+- name: install openssl for password encryption
+  package:
+    name: "openssl"
+    state: present
+
 - name: encrypt steampass for parameter file
   command: echo {{ steamcmd_steam.password }} | openssl enc -a -e -aes-256-cbc -md md5 -pass pass:{{ cryptkey }} 2>/dev/null
   register: steampass
