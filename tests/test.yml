@@ -2,5 +2,5 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - lutangar.steamcmd
+    - ansible-role-steamcmd
     - ansible-role-arma3-server
