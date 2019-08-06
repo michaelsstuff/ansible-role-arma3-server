@@ -54,10 +54,10 @@
     owner: root
     group: root
     mode: '0644'
-  notify: systemd
 
 - name: enable Arma 3 service
   systemd:
     name: arma3-server
     state: started
     enabled: True
+    daemon_reload: yes
