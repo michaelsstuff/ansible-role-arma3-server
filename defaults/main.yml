@@ -29,8 +29,8 @@ kickDuplicate: 1
 verifySignatures: 2
 allowedFilePatching: 1
 
-a3_admins:
-  - 76561197986475363
+# add steam64IDs here
+a3_admins: []
 
 headlessClients:
   - 127.0.0.1

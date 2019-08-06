@@ -15,7 +15,7 @@
 
 - name: install openssl for password encryption
   package:
-    name: "openssl"
+    name: openssl lftp
     state: present
 
 - name: encrypt steampass for parameter file
@@ -40,8 +40,8 @@
     mode: '0600'
 
 - name: copy server.sh
-  copy:
-    src: server.sh
+  template:
+    src: server.sh.j2
     dest: "{{ steamcmd_user_home }}server.sh"
     owner: "{{ steamcmd_user }}"
     group: "{{ steamcmd_user }}"
@@ -58,6 +58,5 @@
 - name: enable Arma 3 service
   systemd:
     name: arma3-server
-    state: started
     enabled: True
     daemon_reload: yes

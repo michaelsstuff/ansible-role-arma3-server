@@ -80,7 +80,7 @@ sed -i "/headlessClients\[\]/c\headlessClients\[\] = ${ip_string}" "$a3_dir"/ser
 
 # download arma3 server
 cd "$home" || exit
-./steamcmd.sh +login "$STEAMUSER" "$STEAMPASS_decrypted" +force_install_dir "$a3_dir" +app_update 233780 validate +quit
+"{{ steamcmd_directory }}steamcmd.sh" +login "$STEAMUSER" "$STEAMPASS_decrypted" +force_install_dir "$a3_dir" +app_update 233780 validate +quit
 
 # check profile folder
 if [ ! -d "${home}/.local/share/Arma 3" ]; then
