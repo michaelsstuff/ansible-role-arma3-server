@@ -11,6 +11,12 @@ arma3_install_dir: "{{ steamcmd_user_home }}/arma3server"
 # < /dev/urandom hexdump -n 16 -e '4/4 "%08X" 1 "\n"'
 cryptkey: 807E5E6D2A1168587A95620AD6662B9B
 
+# mod settings:
+mods: ftp
+ftp_url: ftp://myserver.net/
+ftp_user: myFTPuser
+ftp_pass: myFTPpass
+
 a3_servername: MyServer
 # server config:
 server_public_name: "My ArmA Server"

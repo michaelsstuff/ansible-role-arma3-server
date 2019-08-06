@@ -2,8 +2,12 @@ STEAMUSER={{ steamcmd_steam.username }}
 STEAMPASS={{ steampass.stdout }}
 SERVERNAME={{ a3_servername }}
 
+
+{% if mods="ftp" %}
+MODMETHOD=ftp
+MODURL={{ ftp_url }}
+FTP_USER={{ ftp_user }}
+FTP_PASS={{ ftp_pass }}
+{% else %}
 MODMETHOD=false
-# mods via FTP settings:
-# MODURL="ftp://"
-# FTP_USER=""
-# FTP_PASS=""
+{% endif %}
