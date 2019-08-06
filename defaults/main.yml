@@ -28,6 +28,7 @@ a3_admins:
 
 headlessClients:
   - 127.0.0.1
+
 localClients:
   - 127.0.0.1
 

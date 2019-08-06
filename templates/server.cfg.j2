@@ -33,14 +33,13 @@ upnp = 0;
 
 
 // Whitelists
-admins[] = { {% for admin in a3_admins %}"{{ admin }}"{% if not loop.last %},{% endif %}{% endfor %}
+admins[] = { {% for admin in a3_admins %}"{{ admin }}"{% if not loop.last %},{% else %} {% endif %}{% endfor %}
 };
 
 
-
-headlessClients[] = { {% for client in headlessClients %}"{{ client }}"{% if not loop.last %},{% endif %}{% endfor %}
+headlessClients[] = { {% for client in headlessClients %}"{{ client }}"{% if not loop.last %},{% else %} {% endif %}{% endfor %}
 };
-localClient[] = { {% for client in localClients %}"{{ client }}"{% if not loop.last %},{% endif %}{% endfor %}
+localClient[] = { {% for client in localClients %}"{{ client }}"{% if not loop.last %},{% else %} {% endif %}{% endfor %}
 };
 
 
