@@ -1,0 +1,19 @@
+galaxy_info:
+  role_name: ansible-role-arma3-server
+  author: Michael Schietzsch
+  description: Installs and configures Arma 3 Server and Headless Clients
+
+  license: GPLv3
+
+  min_ansible_version: 1.8
+
+  platforms:
+  - name: EL
+    versions:
+    - 7
+
+  galaxy_tags:
+    - arma
+
+dependencies: 
+  - ansible-role-steamcmd
