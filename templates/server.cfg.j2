@@ -33,7 +33,7 @@ upnp = 0;
 
 
 // Whitelists
-admins[] = { {% for admin in a3_admins %}"{{ user }}"{{ "," if not loop.last }}{% endfor %}
+admins[] = { {% for admin in a3_admins %}"{{ admin }}"{{ "," if not loop.last }}{% endfor %}
 };
 
 
