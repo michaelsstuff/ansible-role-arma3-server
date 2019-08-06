@@ -1,9 +1,10 @@
 ---
-- name: install arma 3
-  command: "{{ steamcmd_directory }}steamcmd.sh +login {{ steamcmd_steam.username }} {{ steamcmd_steam.password }} +force_install_dir {{ arma3_install_dir }} +app_update 233780 validate +quit"
-  register: output
-  become: yes
-  become_user: "{{ steamcmd_user }}"
+#- name: install arma 3
+#  command: "{{ steamcmd_directory }}steamcmd.sh +login {{ steamcmd_steam.username }} {{ steamcmd_steam.password }} +force_install_dir {{ arma3_install_dir }} +app_update 233780 validate +quit"
+#  no_log: true  
+#  register: output
+#  become: yes
+#  become_user: "{{ steamcmd_user }}"
 
 - name: create cryptkeyfile
   template:
@@ -15,12 +16,17 @@
 
 - name: install openssl for password encryption
   package:
-    name: openssl lftp
+    name: openssl, lftp
     state: present
 
 - name: encrypt steampass for parameter file
   shell: 'echo {{ steamcmd_steam.password }} | openssl enc -a -e -aes-256-cbc -md md5 -pass pass:{{ cryptkey }} 2>/dev/null'
   register: steampass
+  no_log: true
+
+- name: encrypt ftp_pass for parameter file
+  shell: 'echo {{ ftp_pass }} | openssl enc -a -e -aes-256-cbc -md md5 -pass pass:{{ cryptkey }} 2>/dev/null'
+  register: ftp_pass_crypted
   no_log: true
 
 - name: generate ArmA 3 parameter file for the service

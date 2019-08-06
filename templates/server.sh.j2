@@ -108,9 +108,13 @@ if [[ $MODMETHOD == "ftp" ]]; then
 moddir="${a3_dir}/mods/"
   if [[ -n "${FTP_USER}" ]]; then
     ftp_pw=$(decrypt "${FTP_PASS}")
-    lftp -e "mirror --parallel=10 --ignore-time -v / ${moddir}" -u "${FTP_USER}","${ftp_pw}" "${MODURL}"
+    if ! lftp -e "mirror --parallel=10 --ignore-time -v / ${moddir}" -u "${FTP_USER}","${ftp_pw}" "${MODURL}"; then
+      exit 1
+    fi
   else
-    lftp -e "mirror --parallel=10 --ignore-time -v / ${moddir}" "${MODURL}"
+    if ! lftp -e "mirror --parallel=10 --ignore-time -v / ${moddir}" "${MODURL}"; then
+      exit 1
+    fi
   fi
 elif [[ $MODMETHOD == "direct" ]]; then
   /bin/bash "${home}"/update-mods.sh
