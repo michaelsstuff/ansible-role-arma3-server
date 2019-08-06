@@ -1,0 +1,5 @@
+---
+- name: install arma 3
+  command: "{{ steamcmd_directory }}steamcmd.sh +login {{ steamcmd_steam.username }} {{ steamcmd_steam.password }} +force_install_dir {{ arma3_install_dir }} +app_update 233780 validate +quit"
+  register: output
+
