@@ -7,3 +7,29 @@ steamcmd_steam:
   username: anonymous
   password: somepass
 arma3_install_dir: "{{ steamcmd_user_home }}/arma3server"
+# create a key like this:
+# < /dev/urandom hexdump -n 16 -e '4/4 "%08X" 1 "\n"'
+cryptkey: 807E5E6D2A1168587A95620AD6662B9B
+
+a3_servername: MyServer
+# server config:
+server_public_name: "My ArmA Server"
+server_password: doll
+admin_password: adminadmin
+command_password: nope
+
+maxPlayers: 64
+kickDuplicate: 1
+verifySignatures: 2
+allowedFilePatching: 1
+
+a3-admins:
+  - 76561197986475363
+
+headlessClients:
+  - 127.0.0.1
+localClients:
+  - 127.0.0.1
+
+voteMissionPlayers: 1
+voteThreshold: 0.33

@@ -1,0 +1,120 @@
+//
+// 						---> server.cfg <---
+//
+// This config was generated with the help of the amazing Arma 3 Server Config Generator (a3server.byjokese.com)
+//
+// LICENCE: https://github.com/byjokese/Arma-Server-Config-Generator/blob/master/LICENCE
+// FEEDBACK: https://github.com/byjokese/Arma-Server-Config-Generator/issues
+//
+
+// GLOBAL SETTINGS
+hostname = "{{ server_public_name }}";
+password = "{{ server_password }}";
+passwordAdmin = "{{ admin_password }}";
+serverCommandPassword = "{{ command_password }}";
+
+logFile = "server_console.log";
+
+
+motd[] = { "this is the message of the day"
+};
+motdInterval = 5;
+
+
+// JOINING RULES
+maxPlayers = {{ maxPlayers }};
+kickDuplicate = {{ kickDuplicate }};
+verifySignatures = {{ verifySignatures }};
+allowedFilePatching = {{ allowedFilePatching }};
+//requiredBuild = 12345;
+
+loopback = 0;
+upnp = 0;
+
+
+// Whitelists
+admins[] = { {% for admin in a3-admins %}"{{ user }}"{{ "," if not loop.last }}{% endfor %}
+};
+
+
+headlessClients[] = { {% for client in headlessClients %}"{{ client }}"{{ "," if not loop.last }}{% endfor %}
+};
+localClient[] = { {% for client in localClients %}"{{ client }}"{{ "," if not loop.last }}{% endfor %}
+};
+
+
+// VOTING
+voteMissionPlayers = {{ voteMissionPlayers }};
+voteThreshold = {{ voteThreshold }};
+
+
+// INGAME SETTINGS
+forceRotorLibSimulation = 0;
+disableVoN = 0;
+vonCodec = 0;
+vonCodecQuality = 0;
+persistent = 0;
+timeStampFormat = "short";
+BattlEye = 1;
+drawingInMap = 1;
+allowedLoadFileExtensions[] = {"hpp","sqs","sqf","fsm","cpp","paa","txt","xml","inc","ext","sqm","ods","fxy","lip","csv","kb","bik","bikb","html","htm","biedi"}; //only allow files with those extensions to be loaded via loadFile command (since Arma 3 build 1.19.124216)
+allowedPreprocessFileExtensions[] = {"hpp","sqs","sqf","fsm","cpp","paa","txt","xml","inc","ext","sqm","ods","fxy","lip","csv","kb","bik","bikb","html","htm","biedi"}; //only allow files with those extensions to be loaded via preprocessFile/preprocessFileLineNumber commands (since Arma 3 build 1.19.124323)
+allowedHTMLLoadExtensions[] = {"htm","html","xml","txt"};
+//allowedHTMLLoadURIs = {};
+disconnectTimeout = 90;
+maxdesync = 150;
+maxping = 200;
+maxpacketloss = 50;
+
+
+// SCRIPTING ISSUES
+onUserConnected = "";
+onUserDisconnected = "";
+doubleIdDetected = "";
+
+// SIGNATURE VERIFICATION
+onUnsignedData = "kick (_this select 0)";
+onHackedData = "kick (_this select 0)";
+onDifferentData = "";
+
+
+// MISSIONS CYCLE
+class Missions {
+};
+
+// DIFICULTY
+class DifficultyPresets
+{
+	class CustomDifficulty
+	{
+		class Options
+		{
+			groupIndicators=0;
+			friendlyTags=0;
+			enemyTags=0;
+			detectedMines=0;
+			commands=1;
+			waypoints=0;
+			weaponInfo=1;
+			stanceIndicator=1;
+			reducedDamage=0;
+			staminaBar=1;
+			weaponCrosshair=0;
+			visionAid=0;
+			thirdPersonView=1;
+			cameraShake=1;
+			scoreTable=1;
+			deathMessages=1;
+			vonID=0;
+			mapContent=1;
+			autoReport=0;
+			multipleSaves=1;
+		};
+		aiLevelPreset=3;
+		};
+	class CustomAILevel
+	{
+		skillAI=0.7;
+		precisionAI=0.6;
+	};
+};

@@ -1,0 +1,11 @@
+[Unit]
+Description=Arma 3 Server
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart={{ steamcmd_user_home }}server.sh
+User={{ steamcmd_user }}
+
+[Install]
+WantedBy=multi-user.target
