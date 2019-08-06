@@ -40,7 +40,8 @@
     mode: '0600'
 
 - name: copy server.sh
-  file:
+  copy:
+    src: server.sh
     dest: "{{ steamcmd_user_home }}server.sh"
     owner: "{{ steamcmd_user }}"
     group: "{{ steamcmd_user }}"
