@@ -6,7 +6,8 @@ steamcmd_login_timeout: 120
 steamcmd_steam:
   username: anonymous
   password: somepass
-arma3_install_dir: "{{ steamcmd_user_home }}/arma3server"
+arma3_install_dir: "{{ steamcmd_user_home }}/arma3server/"
+install_arma3: false #set to true if you want this playbook to install arma, false if first start should do it
 # create a key like this:
 # < /dev/urandom hexdump -n 16 -e '4/4 "%08X" 1 "\n"'
 cryptkey: 807E5E6D2A1168587A95620AD6662B9B

@@ -1,10 +1,11 @@
 ---
-#- name: install arma 3
-#  command: "{{ steamcmd_directory }}steamcmd.sh +login {{ steamcmd_steam.username }} {{ steamcmd_steam.password }} +force_install_dir {{ arma3_install_dir }} +app_update 233780 validate +quit"
-#  no_log: true  
-#  register: output
-#  become: yes
-#  become_user: "{{ steamcmd_user }}"
+- name: install arma 3
+  command: "{{ steamcmd_directory }}steamcmd.sh +login {{ steamcmd_steam.username }} {{ steamcmd_steam.password }} +force_install_dir {{ arma3_install_dir }} +app_update 233780 validate +quit"
+  no_log: true  
+  register: output
+  become: yes
+  become_user: "{{ steamcmd_user }}"
+  when: install_arma3
 
 - name: create cryptkeyfile
   template:
@@ -37,6 +38,13 @@
     group: "{{ steamcmd_user }}"
     mode: '0600'
 
+- name: create ArmA 3 install directory
+  file:
+    path: "{{ arma3_install_dir }}"
+    state: directory
+    owner: "{{ steamcmd_user }}"
+    group: "{{ steamcmd_user }}"
+
 - name: generate ArmA 3 server.cfg
   template:
     src: server.cfg.j2
@@ -44,6 +52,13 @@
     owner: "{{ steamcmd_user }}"
     group: "{{ steamcmd_user }}"
     mode: '0600'
+
+- name: create ArmA 3 mod directory
+  file:
+    path: "{{ arma3_install_dir }}mods"
+    state: directory
+    owner: "{{ steamcmd_user }}"
+    group: "{{ steamcmd_user }}"
 
 - name: copy server.sh
   template:
