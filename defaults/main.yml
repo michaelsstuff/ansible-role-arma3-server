@@ -40,3 +40,13 @@ localClients:
 
 voteMissionPlayers: 1
 voteThreshold: 0.33
+forceRotorLibSimulation: 0
+disableVoN: 1
+vonCodec: 0
+vonCodecQuality: 0
+persistent: 0
+BattlEye: 1
+drawingInMap: 1
+maxdesync: 150
+maxping: 200
+maxpacketloss: 50
