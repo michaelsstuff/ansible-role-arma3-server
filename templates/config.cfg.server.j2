@@ -6,7 +6,7 @@ SERVERNAME={{ a3_servername }}
 MODMETHOD=ftp
 MODURL={{ ftp_url }}
 FTP_USER={{ ftp_user }}
-FTP_PASS={{ ftp_pass_crypted }}
+FTP_PASS={{ ftp_pass_crypted.stdout }}
 {% else %}
 MODMETHOD=false
 {% endif %}
