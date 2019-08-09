@@ -10,7 +10,11 @@ arma3_install_dir: "{{ steamcmd_user_home }}/arma3server/"
 install_arma3: false #set to true if you want this playbook to install arma, false if first start should do it
 # create a key like this:
 # < /dev/urandom hexdump -n 16 -e '4/4 "%08X" 1 "\n"'
-cryptkey: 807E5E6D2A1168587A95620AD6662B9B
+# cryptkey: 807E5E6D2A1168587A95620AD6662B9B
+# enter en
+serverpass: joinme
+
+# server_ip: 127.0.0.1
 
 # mod settings:
 mods: ftp

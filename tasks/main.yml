@@ -1,4 +1,9 @@
 ---
+- name: create cryptkey
+  command: < /dev/urandom hexdump -n 16 -e '4/4 "%08X" 1 "\n"'
+  register: cryptkeygenerated
+  when: cryptkey is not defined
+
 - name: install arma 3
   command: "{{ steamcmd_directory }}steamcmd.sh +login {{ steamcmd_steam.username }} {{ steamcmd_steam.password }} +force_install_dir {{ arma3_install_dir }} +app_update 233780 validate +quit"
   no_log: true  
@@ -15,24 +20,29 @@
     group: "{{ steamcmd_user }}"
     mode: '0600'
 
-- name: install openssl for password encryption
+- name: install packages
   package:
     name: openssl, lftp
     state: present
 
 - name: encrypt steampass for parameter file
-  shell: 'echo {{ steamcmd_steam.password }} | openssl enc -a -e -aes-256-cbc -md md5 -pass pass:{{ cryptkey }} 2>/dev/null'
+  shell: 'echo {{ steamcmd_steam.password }} | openssl enc -a -e -aes-256-cbc -md md5 -pass pass:{{ cryptkey | cryptkeygenerated.output  }} 2>/dev/null'
   register: steampass
   no_log: true
 
+- name: encrypt serverpass for parameter file
+  shell: 'echo {{ serverpass }} | openssl enc -a -e -aes-256-cbc -md md5 -pass pass:{{ cryptkey | cryptkeygenerated.output  }} 2>/dev/null'
+  register: serverpass_crypted
+  no_log: true
+
 - name: encrypt ftp_pass for parameter file
-  shell: 'echo {{ ftp_pass }} | openssl enc -a -e -aes-256-cbc -md md5 -pass pass:{{ cryptkey }} 2>/dev/null'
+  shell: 'echo {{ ftp_pass }} | openssl enc -a -e -aes-256-cbc -md md5 -pass pass:{{ cryptkey | cryptkeygenerated.output  }} 2>/dev/null'
   register: ftp_pass_crypted
   no_log: true
 
 - name: generate ArmA 3 parameter file for the service
   template:
-    src: config.cfg.server.j2
+    src: config.cfg.j2
     dest: "{{ steamcmd_user_home }}config.cfg"
     owner: "{{ steamcmd_user }}"
     group: "{{ steamcmd_user }}"

@@ -1,6 +1,15 @@
 STEAMUSER={{ steamcmd_steam.username }}
 STEAMPASS={{ steampass.stdout }}
+{% if is_server %}
 SERVERNAME={{ a3_servername }}
+{% endif %}
+
+SERVERPASS={{ serverpass_crypted.stdout }}
+
+{% if is_hc %}
+SERVER={{ a3srv_fact.hcloud_server.ipv4_address | server_ip }}
+ISHC=true
+{% endif %}
 
 {% if mods == "ftp" %}
 MODMETHOD=ftp
