@@ -26,17 +26,17 @@
     state: present
 
 - name: encrypt steampass for parameter file
-  shell: 'echo {{ steamcmd_steam.password }} | openssl enc -a -e -aes-256-cbc -md md5 -pass pass:{{ cryptkey | cryptkeygenerated.output  }} 2>/dev/null'
+  shell: 'echo {{ steamcmd_steam.password }} | openssl enc -a -e -aes-256-cbc -md md5 -pass pass:{{ cryptkey|default(cryptkeygenerated.output) }} 2>/dev/null'
   register: steampass
   no_log: true
 
 - name: encrypt serverpass for parameter file
-  shell: 'echo {{ serverpass }} | openssl enc -a -e -aes-256-cbc -md md5 -pass pass:{{ cryptkey | cryptkeygenerated.output  }} 2>/dev/null'
+  shell: 'echo {{ serverpass }} | openssl enc -a -e -aes-256-cbc -md md5 -pass pass:{{ cryptkey|default(cryptkeygenerated.output) }} 2>/dev/null'
   register: serverpass_crypted
   no_log: true
 
 - name: encrypt ftp_pass for parameter file
-  shell: 'echo {{ ftp_pass }} | openssl enc -a -e -aes-256-cbc -md md5 -pass pass:{{ cryptkey | cryptkeygenerated.output  }} 2>/dev/null'
+  shell: 'echo {{ ftp_pass }} | openssl enc -a -e -aes-256-cbc -md md5 -pass pass:{{ cryptkey|default(cryptkeygenerated.output) }} 2>/dev/null'
   register: ftp_pass_crypted
   no_log: true
 

@@ -7,7 +7,7 @@ SERVERNAME={{ a3_servername }}
 SERVERPASS={{ serverpass_crypted.stdout }}
 
 {% if is_hc %}
-SERVER={{ a3srv_fact.hcloud_server.ipv4_address | server_ip }}
+SERVER={{ a3srv_fact.hcloud_server.ipv4_address | default(server_ip) }}
 ISHC=true
 {% endif %}
 
