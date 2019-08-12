@@ -1,4 +1,11 @@
 ---
+- name: create emtpy IP list
+  set_fact:
+    ips: []
+
+- include: hcloud_ips.yml
+  when: hcloud_token
+
 - name: create cryptkey
   command: < /dev/urandom hexdump -n 16 -e '4/4 "%08X" 1 "\n"'
   register: cryptkeygenerated

@@ -1,0 +1,12 @@
+---
+- name: Add server IP to list
+  set_fact:
+    ips:
+      - "{{ a3srv_fact.hcloud_server.ipv4_address }}"
+
+- name: add HC IP to list
+  set_fact:
+    ips: "{{ ips|default([]) +
+             hc_fact.results|
+             json_query('[*].hcloud_server.ipv4_address')
+             }}"
